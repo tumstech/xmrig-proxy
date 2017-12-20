@@ -24,6 +24,7 @@
 #include <cmath>
 #include <string.h>
 #include <uv.h>
+#include <ctime>
 
 #if _WIN32
 #   include "winsock2.h"
@@ -290,6 +291,7 @@ void ApiState::getWorkers(rapidjson::Document &doc) const
          array.AddMember("Invalid", worker.invalid(), allocator);
          array.AddMember("Hashes", worker.hashes(), allocator);
          array.AddMember("Last Hash", worker.lastHash(), allocator);
+         array.AddMember("Last Hash TT", ctime(&worker.lastHashTT()), allocator);
          array.AddMember("Hash in 1 min", normalize(worker.hashrate(60)), allocator);
          array.AddMember("Hash in 10 min", normalize(worker.hashrate(600)), allocator);
          array.AddMember("Hash in 1 Hour", normalize(worker.hashrate(3600)), allocator);

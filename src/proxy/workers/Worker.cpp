@@ -36,6 +36,7 @@ Worker::Worker() :
     m_hashes(0),
     m_invalid(0),
     m_lastHash(0),
+    m_lastHash_tt(0),
     m_rejected(0)
 {
 }
@@ -51,6 +52,7 @@ Worker::Worker(size_t id, const std::string &name, const std::string &ip) :
     m_hashes(0),
     m_invalid(0),
     m_lastHash(0),
+    m_lastHash_tt(0),
     m_rejected(0)
 {
 }
@@ -65,6 +67,7 @@ void Worker::add(const SubmitResult &result)
 
     using namespace std::chrono;
     m_lastHash = duration_cast<milliseconds>(system_clock::now().time_since_epoch()).count();
+    m_lastHash_tt = system_clock::now();
 }
 
 
