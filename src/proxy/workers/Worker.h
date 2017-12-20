@@ -52,7 +52,7 @@ public:
     inline uint64_t hashes() const            { return m_hashes; }
     inline uint64_t invalid() const           { return m_invalid; }
     inline uint64_t lastHash() const          { return m_lastHash; }
-    inline uint64_t lastHashTT() const        { return m_lastHash_tt; }
+    //inline uint64_t lastHashTT() const        { return m_lastHash_tt; }
     inline uint64_t rejected() const          { return m_rejected; }
     inline void add(const char *ip)           { m_ip = ip; m_connections++; }
     inline void reject(bool invalid)          { invalid ? m_invalid++ : m_rejected++; }
@@ -68,7 +68,7 @@ private:
     uint64_t m_hashes;
     uint64_t m_invalid;
     uint64_t m_lastHash;
-    time_t m_lastHash_tt;
+    //time_t m_lastHash_tt;
     uint64_t m_rejected;
 };
 
