@@ -266,20 +266,35 @@ void ApiState::getWorkers(rapidjson::Document &doc) const
             continue;
         }
 
-         rapidjson::Value array(rapidjson::kArrayType);
-         array.PushBack(rapidjson::StringRef(worker.name()), allocator);
-         array.PushBack(rapidjson::StringRef(worker.ip()), allocator);
-         array.PushBack(worker.connections(), allocator);
-         array.PushBack(worker.accepted(), allocator);
-         array.PushBack(worker.rejected(), allocator);
-         array.PushBack(worker.invalid(), allocator);
-         array.PushBack(worker.hashes(), allocator);
-         array.PushBack(worker.lastHash(), allocator);
-         array.PushBack(normalize(worker.hashrate(60)), allocator);
-         array.PushBack(normalize(worker.hashrate(600)), allocator);
-         array.PushBack(normalize(worker.hashrate(3600)), allocator);
-         array.PushBack(normalize(worker.hashrate(3600 * 12)), allocator);
-         array.PushBack(normalize(worker.hashrate(3600 * 24)), allocator);
+//         rapidjson::Value array(rapidjson::kArrayType);
+//         array.PushBack(rapidjson::StringRef(worker.name()), allocator);
+//         array.PushBack(rapidjson::StringRef(worker.ip()), allocator);
+//         array.PushBack(worker.connections(), allocator);
+//         array.PushBack(worker.accepted(), allocator);
+//         array.PushBack(worker.rejected(), allocator);
+//         array.PushBack(worker.invalid(), allocator);
+//         array.PushBack(worker.hashes(), allocator);
+//         array.PushBack(worker.lastHash(), allocator);
+//         array.PushBack(normalize(worker.hashrate(60)), allocator);
+//         array.PushBack(normalize(worker.hashrate(600)), allocator);
+//         array.PushBack(normalize(worker.hashrate(3600)), allocator);
+//         array.PushBack(normalize(worker.hashrate(3600 * 12)), allocator);
+//         array.PushBack(normalize(worker.hashrate(3600 * 24)), allocator);
+
+         rapidjson::Value array(rapidjson::kObjectType);
+         array.AddMember("Worker Name", rapidjson::StringRef(worker.name()), allocator);
+         array.AddMember("Worker IP", rapidjson::StringRef(worker.ip()), allocator);
+         array.AddMember("Worker Connection", worker.connections(), allocator);
+         array.AddMember("Accepted", worker.accepted(), allocator);
+         array.AddMember("Rejected", worker.rejected(), allocator);
+         array.AddMember("Invalid", worker.invalid(), allocator);
+         array.AddMember("Hashes", worker.hashes(), allocator);
+         array.AddMember("Last Hash", worker.lastHash(), allocator);
+         array.AddMember("Hash in 1 min", normalize(worker.hashrate(60)), allocator);
+         array.AddMember("Hash in 10 min", normalize(worker.hashrate(600)), allocator);
+         array.AddMember("Hash in 1 Hour", normalize(worker.hashrate(3600)), allocator);
+         array.AddMember("Hash in 12 Hour", normalize(worker.hashrate(3600 * 12)), allocator);
+         array.AddMember("Hash in 1 Day", normalize(worker.hashrate(3600 * 24)), allocator);
 
          workers.PushBack(array, allocator);
     }
